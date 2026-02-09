@@ -6,6 +6,10 @@ Once you have those files, you can create spherical collisions and so on for cre
 
 ## Step 1: Converting USD to URDF
 
+In order to convert to URDF first go to `extensions` then search for `USD to URDF converter` then toggle to `on`.
+
+But before you could click export to URDF, you need to have prequisits in how you created the kinematic chain for your robot.
+
 ## Step 2: Converting USD to .yaml robot description file
 
 ## Step 3: Collisions
