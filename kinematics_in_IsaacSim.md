@@ -4,16 +4,12 @@ Lula Robot description is Isaac Sim's inbuilt forward and inverse kinematics cal
 
 Once you have those files, you can create spherical collisions and so on for creating the kinematic chain for optimal physics engine performance in simulation
 
-## Step 1: Converting USD to URDF
+## PREREQUISITS
 
-In order to convert to URDF first go to `extensions` then search for `USD to URDF converter` then toggle to `on`.
+You already need to have the following files ready before we can move forward with using the Lula Kinematics library:
+    1. A URDF file version of your robot with colliders.
+    2. A .yaml robot description file.
 
-But before you could click export to URDF, you need to have prequisits in how you created the kinematic chain for your robot.
+For the above you can view other documents in this repository.
 
-## Step 2: Converting USD to .yaml robot description file
-
-## Step 3: Collisions
-
-## Forward Kinematics
-
-## Inverse Kinematics
+## Kinematics
