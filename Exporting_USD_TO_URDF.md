@@ -97,7 +97,21 @@ You might be wondering: "If all Rigid Bodies must be direct children of the top 
 > Note: Make sure all the joints are ONLY under this scope.
 
 ## Step 6: Colliders
+It can be confusing to figure out how to export colliders without them clashing with your robot's beautiful visual mesh. If you've created collider shapes (like cubes or cylinders) for your Rigid Bodies, you must tell the exporter that these are physics-only objects.
 
+If you don't, the exporter will treat your collider as a visible part of the robot, resulting in a "squished" model where the actual geometry and the collider boxes are fused together.
 
+How to set it up correctly:
+
+1. Select your collider prim in the Stage tab.
+
+2. In the Property panel, scroll down to the Display section.
+
+3. Find the Purpose attribute and change it to proxy.
+
+Setting the purpose to proxy sends a specific signal to the URDF exporter: "Use this shape for the <collision> tag, but ignore it for the <visual> tag." This ensures your URDF has accurate physics boundaries while keeping the robot's appearance clean and professional.
 
 ## What next?
+Now you can confidently export your robot to URDF!
+
+> Once you have saved your new URDF file, head over to the 'Creating a .yaml File' section in this repository. This is the next essential step to unlocking Lula Kinematics, motion planning, and robot autonomy.
