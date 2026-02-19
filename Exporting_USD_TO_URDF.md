@@ -26,6 +26,10 @@ Note: The highest level prim should act as just a container of all the individua
 ## Step 3: Rigid bodies
 Ensure your robot's hierarchy is properly structured before exporting. All Rigid Bodies should be direct descendants of your top-level prim. If a Rigid Body is tucked inside a sub-Xform, drag it out and drop it directly under the root container to prevent export errors.
 
+![alt text](image-1.png)
+
+Notice that all the children directly below the myRobot prim are rigid bodies only except the **joint scope** which does not have any physical structure.
+
 ### Physics and Mass Requirements
 
 The URDF format is inherently physics-heavy. For a successful export, the physics engine requires a fully defined kinematic chain where every Rigid Body (any independent part of the robot) is connected via a Joint.
@@ -33,10 +37,15 @@ The URDF format is inherently physics-heavy. For a successful export, the physic
 In addition to the structure, every Rigid Body must have its physical properties defined—specifically its Mass. Before exporting, ensure each body has a Mass API applied:
 
 1. Select the Rigid Body in the Stage.
-
 2. Navigate to `Add → Physics → Mass.`
 
 Pro-tip: You can leave the values as **Autocomputed** for now, or enter specific values if you have the technical specifications for your robot's components.
+
+Here is an example of autocomputed mass for the Arm_body mentioned above in the example hierarchy of dual arm **my_Robot**.
+
+![alt text](image-2.png)
+
+
 
 ### Why this matters
 
@@ -70,6 +79,8 @@ For the joint connecting your **Top Prim** to your **Base**:
 * **Body 1 (Child):** The Robot Base.
 * **Joint Type:** Fixed.
 
+![alt text](image-4.png)
+
 #### 2. Connecting the First Moving Part
 
 For the joint connecting your **Base** to the **First Link** of an arm or wheel system:
@@ -77,6 +88,10 @@ For the joint connecting your **Base** to the **First Link** of an arm or wheel 
 * **Body 0 (Parent):** The Robot Base.
 * **Body 1 (Child):** The first part of the moving system (e.g., Shoulder or Axle).
 * **Joint Type:** Fixed (or Revolute, depending on your design).
+
+That means for left arm it should look like this:
+
+![alt text](image-5.png)
 
 #### 3. Sequential Moving Joints
 
@@ -88,6 +103,10 @@ Continue this pattern down the chain:
 
 > **Why this matters:** If you reverse Body 0 and Body 1, you create a "circular dependency" or a reversed kinematic chain. This will cause your robot to behave erratically in simulations like Lula or move in ways that defy physics.
 
+This is what it should look like for the first moving joint(revolute) combining base_link of left_arm and the shoulder link:
+
+![alt text](image-6.png)
+
 ## Step 5: Joints scope
 You might be wondering: "If all Rigid Bodies must be direct children of the top prim, where do I put the joints?" To keep your Stage clean and ensure a successful export, the best practice is to group all your joints into a Scope. Unlike an Xform, a Scope is a container that does not carry its own coordinate transformations, making it "invisible" to the kinematic math while keeping your file organized:
 
@@ -95,6 +114,8 @@ You might be wondering: "If all Rigid Bodies must be direct children of the top 
 2. drag all the joints under this scope.
 
 > Note: Make sure all the joints are ONLY under this scope.
+
+![alt text](image-3.png)
 
 ## Step 6: Colliders
 It can be confusing to figure out how to export colliders without them clashing with your robot's beautiful visual mesh. If you've created collider shapes (like cubes or cylinders) for your Rigid Bodies, you must tell the exporter that these are physics-only objects.
@@ -108,6 +129,10 @@ How to set it up correctly:
 2. In the Property panel, scroll down to the Display section.
 
 3. Find the Purpose attribute and change it to proxy.
+
+Here is what it should look like in the end for each collider:
+
+![alt text](image-7.png)
 
 Setting the purpose to proxy sends a specific signal to the URDF exporter: "Use this shape for the <collision> tag, but ignore it for the <visual> tag." This ensures your URDF has accurate physics boundaries while keeping the robot's appearance clean and professional.
 
