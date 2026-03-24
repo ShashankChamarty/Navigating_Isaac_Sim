@@ -19,7 +19,7 @@ class DualArmKinematics:
         # Paths
         self._downloads_path = os.path.expanduser("~/Downloads/Junebase_Primos")
         self._usd_path = os.path.join(self._downloads_path, "Junebase_Primos.usd")
-        self._urdf_path = os.path.join(self._downloads_path, "Primos.urdf")
+        self._urdf_path = os.path.join(self._downloads_path, "primos_final.urdf")
         self._left_yaml = os.path.join(self._downloads_path, "Left_Arm.yaml")
         self._right_yaml = os.path.join(self._downloads_path, "Right_Arm.yaml")
 
