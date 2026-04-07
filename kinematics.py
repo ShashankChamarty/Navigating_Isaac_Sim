@@ -92,7 +92,7 @@ if __name__ == "__main__":
     
     # Now you can call them separately!
     logic.setup_left_arm()
-   #logic.setup_right_arm()
+    logic.setup_right_arm()
 
     while simulation_app.is_running():
         logic._world.step(render=True)
