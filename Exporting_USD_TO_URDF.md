@@ -14,7 +14,7 @@ This will enable the URDF exporter. Now you can go to **file → export_to_urdf*
 
 When using this exporter, keep in mind that the **default prim** and the **children** of that prim will be the **ONLY** ones that will be exported.
 
-![alt text](image.png) 
+![alt text](images/image.png) 
 
 Therefore, move your highest level xform/prim (my_robot in this case) and drag it out of **World** to be it's separate entity.
 
@@ -26,7 +26,7 @@ Note: The highest level prim should act as just a container of all the individua
 ## Step 3: Rigid bodies
 Ensure your robot's hierarchy is properly structured before exporting. All Rigid Bodies should be direct descendants of your top-level prim. If a Rigid Body is tucked inside a sub-Xform, drag it out and drop it directly under the root container to prevent export errors.
 
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 
 Notice that all the children directly below the myRobot prim are rigid bodies only except the **joint scope** which does not have any physical structure.
 
@@ -43,7 +43,7 @@ Pro-tip: You can leave the values as **Autocomputed** for now, or enter specific
 
 Here is an example of autocomputed mass for the Arm_body mentioned above in the example hierarchy of dual arm **my_Robot**.
 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 
 
@@ -79,7 +79,7 @@ For the joint connecting your **Top Prim** to your **Base**:
 * **Body 1 (Child):** The Robot Base.
 * **Joint Type:** Fixed.
 
-![alt text](image-4.png)
+![alt text](images/image-4.png)
 
 #### 2. Connecting the First Moving Part
 
@@ -91,7 +91,7 @@ For the joint connecting your **Base** to the **First Link** of an arm or wheel 
 
 That means for left arm it should look like this:
 
-![alt text](image-5.png)
+![alt text](images/image-5.png)
 
 #### 3. Sequential Moving Joints
 
@@ -105,7 +105,7 @@ Continue this pattern down the chain:
 
 This is what it should look like for the first moving joint(revolute) combining base_link of left_arm and the shoulder link:
 
-![alt text](image-6.png)
+![alt text](images/image-6.png)
 
 ## Step 5: Joints scope
 You might be wondering: "If all Rigid Bodies must be direct children of the top prim, where do I put the joints?" To keep your Stage clean and ensure a successful export, the best practice is to group all your joints into a Scope. Unlike an Xform, a Scope is a container that does not carry its own coordinate transformations, making it "invisible" to the kinematic math while keeping your file organized:
@@ -115,7 +115,7 @@ You might be wondering: "If all Rigid Bodies must be direct children of the top 
 
 > Note: Make sure all the joints are ONLY under this scope.
 
-![alt text](image-3.png)
+![alt text](images/image-3.png)
 
 ## Step 6: Colliders
 It can be confusing to figure out how to export colliders without them clashing with your robot's beautiful visual mesh. If you've created collider shapes (like cubes or cylinders) for your Rigid Bodies, you must tell the exporter that these are physics-only objects.
@@ -132,7 +132,7 @@ How to set it up correctly:
 
 Here is what it should look like in the end for each collider:
 
-![alt text](image-7.png)
+![alt text](images/image-7.png)
 
 Setting the purpose to proxy sends a specific signal to the URDF exporter: "Use this shape for the <collision> tag, but ignore it for the <visual> tag." This ensures your URDF has accurate physics boundaries while keeping the robot's appearance clean and professional.
 

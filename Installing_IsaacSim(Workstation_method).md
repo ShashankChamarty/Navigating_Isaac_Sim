@@ -36,4 +36,5 @@ Run the commands below:
     ./isaac-sim.sh
     ```
 
-
+##
+Now you should have a clean Isaac Sim setup up and running!
